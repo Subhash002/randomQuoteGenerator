@@ -5,7 +5,7 @@ const quoteText = document.querySelector(".quote"),
   copyBtn = document.querySelector(".copy"),
   twitterBtn = document.querySelector(".twitter"),
   synth = speechSynthesis;
-
+let intervalId;
 function randomQuote() {
   quoteBtn.classList.add("loading");
   quoteBtn.innerText = "new Quote for you..";
@@ -15,7 +15,8 @@ function randomQuote() {
     .then((data) => {
       let i = 0;
       quoteText.innerHTML = "";
-      const intervalId = setInterval(() => {
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
         quoteText.innerHTML += data[i];
         i++;
         if (i === data.length) clearInterval(intervalId);
